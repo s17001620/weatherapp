@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class WeatherServiceFrontendUIFactory {
     @Autowired
     private CitySelectViewFactory citySelectViewFactory;
-
+    @Autowired
     private WeatherDataDisplayViewFactory weatherDataDisplayViewFactory;
     
     

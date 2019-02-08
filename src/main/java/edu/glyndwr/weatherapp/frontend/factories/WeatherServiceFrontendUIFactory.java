@@ -2,9 +2,9 @@
 
 package edu.glyndwr.weatherapp.frontend.factories;
 
+import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.Forecast;
 import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.WeatherData;
 import edu.glyndwr.weatherapp.frontend.controller.WeatherAppFrontendController;
-import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -42,7 +42,11 @@ public class WeatherServiceFrontendUIFactory {
  public GridPane buildWeatherDataResultPaneForToday(WeatherData weatherData){
      return weatherDataDisplayViewFactory.generateWeatherDataPane(weatherData);
  }
- 
+  public GridPane buildWeatherDataResultPaneForForcast(Forecast forecast){
+      GridPane forcastPane = new GridPane();
+      forecast.getEntries().forEach(f-> forcastPane.addRow(forecast.getEntries().indexOf(f),weatherDataDisplayViewFactory.generateWeatherDataPane(f)));
+      return forcastPane;
+  }
 
 
 }

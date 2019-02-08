@@ -4,11 +4,9 @@ package edu.glyndwr.weatherapp.frontend.controller;
 
 import edu.glyndwr.weatherapp.backend.weatherservice.controller.WeatherServiceController;
 import edu.glyndwr.weatherapp.frontend.configuration.WeatherAppFrontendConfiguration;
-import edu.glyndwr.weatherapp.frontend.factories.WeatherDataDisplayViewFactory;
 import edu.glyndwr.weatherapp.frontend.factories.WeatherServiceFrontendUIFactory;
 import edu.glyndwr.weatherapp.frontend.model.City;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -45,7 +43,9 @@ private GridPane resultPane;
     }
 
     public void loadWeather(City city) {
-        this.resultPane = weatherServiceFrontendUIFactory.buildWeatherDataResultPaneForToday(weatherServiceController.getWeatherToday(city.getCity(), city.getCountry()));
+        this.resultPane =  new GridPane();
+        this.resultPane.addRow(0, weatherServiceFrontendUIFactory.buildWeatherDataResultPaneForToday(weatherServiceController.getWeatherToday(city.getCountry(),city.getCity())));
+        this.resultPane.addRow(1, weatherServiceFrontendUIFactory.buildWeatherDataResultPaneForForcast(weatherServiceController.getWeatherForecast(city.getCountry(),city.getCity())));     
     }
     
     public void initializeFields(){

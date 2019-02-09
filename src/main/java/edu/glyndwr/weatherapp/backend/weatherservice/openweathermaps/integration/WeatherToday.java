@@ -4,6 +4,7 @@ package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integratio
 
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONObject;
 
 /**
  *
@@ -12,6 +13,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WeatherToday extends WeatherData {
-private String name;
+
+    public WeatherToday(){
+    super();
+}
+    public WeatherToday(JSONObject json){
+    super(json);
+}
+    private String name;
 
 }

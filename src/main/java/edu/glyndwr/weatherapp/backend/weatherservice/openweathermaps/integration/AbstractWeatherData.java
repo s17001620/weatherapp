@@ -10,8 +10,9 @@ import java.util.Calendar;
 import org.json.JSONObject;
 
 abstract public class AbstractWeatherData {
-	
+
         protected static final String JSON_DATE_TIME = "dt";
+        protected static final String JSON_WEATHER   = "weather";
 	protected static final String JSON_MAIN      = "main";
 	protected static final String JSON_WIND      = "wind";
 
@@ -42,12 +43,23 @@ abstract public class AbstractWeatherData {
 		abstract public int getVarBeg ();
 		abstract public int getVarEnd ();
 	}
+        
+        static abstract public class Weather {
+            protected static final String JSON_VAR_MAIN_ID = "id";
+            protected static final String JSON_VAR_MAIN_ICON = "icon";
+            protected static final String JSON_VAR_MAIN_WEATHER = "main";
+            protected static final String JSON_VAR_MAIN_WEATHER_DESCRIPTION = "description";
+            
+            abstract public float getMainWeather ();
+            abstract public float getDescription ();
+        }
+        
 
-	private final long dateTime;
+	protected final long dateTime;
 
         public AbstractWeatherData () {
-            this.dateTime = Calendar.getInstance().getTimeInMillis();
-        }
+		this.dateTime = Calendar.getInstance().getTimeInMillis();
+	}
         
 	public AbstractWeatherData (JSONObject json) {
 		this.dateTime = json.optLong (WeatherData.JSON_DATE_TIME, Long.MIN_VALUE);

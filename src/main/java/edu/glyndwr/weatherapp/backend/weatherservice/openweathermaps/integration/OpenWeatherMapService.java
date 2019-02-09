@@ -1,7 +1,6 @@
-
-
 package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration;
-import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.configuration.WeatherappProperties;
+
+import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.configuration.WeatherAppApiConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.URI;
@@ -21,41 +20,58 @@ import org.springframework.web.util.UriTemplate;
 @Service
 public class OpenWeatherMapService {
 
-	private static final String WEATHER_URL =
-			"http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}";
+    private static final String WEATHER_URL
+            = "http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}";
 
-	private static final String FORECAST_URL =
-			"http://api.openweathermap.org/data/2.5/forecast?q={city},{country}&APPID={key}";
+    private static final String FORECAST_URL
+            = "http://api.openweathermap.org/data/2.5/forecast?q={city},{country}&APPID={key}";
 
-	private static final Logger logger = LoggerFactory.getLogger(OpenWeatherMapService.class);
+    private static final Logger logger = LoggerFactory.getLogger(OpenWeatherMapService.class);
 
-	private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-	private final String apiKey;
+    private final String apiKey;
 
-	public OpenWeatherMapService(RestTemplateBuilder restTemplateBuilder,
-			WeatherappProperties properties) {
-		this.restTemplate = restTemplateBuilder.build();
-		this.apiKey = properties.getApi().getKey();
-	}
-        
-	public WeatherToday getWeatherToday(String country, String city) {
-		logger.info("Requesting current weather for {}/{}", country, city);
-		URI url = new UriTemplate(WEATHER_URL).expand(city, country, this.apiKey);
-		return invoke(url, WeatherToday.class);
-	}
+    public OpenWeatherMapService(RestTemplateBuilder restTemplateBuilder,
+            WeatherAppApiConfiguration properties) {
+        this.restTemplate = restTemplateBuilder.build();
+        this.apiKey = properties.getKey();
+    }
 
-	public Forecast getForecast(String country, String city) {
-		logger.info("Requesting weather forecast for {}/{}", country, city);
-		URI url = new UriTemplate(FORECAST_URL).expand(city, country, this.apiKey);
-		return invoke(url, Forecast.class);
-	}
+    public WeatherToday getWeatherToday(String country, String city) {
+        logger.info("Requesting current weather for {}/{}", country, city);
+        URI url = new UriTemplate(WEATHER_URL).expand(city, country, this.apiKey);
+        WeatherToday weather = new WeatherToday();
+        try {
+            weather = invoke(url, WeatherToday.class);
+        } catch (Exception e) {
 
-	private <T> T invoke(URI url, Class<T> responseType) {
-		RequestEntity<?> request = RequestEntity.get(url)
-				.accept(MediaType.APPLICATION_JSON).build();
-		ResponseEntity<T> exchange = this.restTemplate
-				.exchange(request, responseType);
-		return exchange.getBody();
-	}
+            weather.setDeg(0.0);
+            weather.setGust(0.0);
+            weather.setMainWeather("CITY NOT FOUND!");
+            weather.setMainWeatherDescription("CITY NOT FOUND!");
+            weather.setTemp(0);
+            weather.setHumidity(0);
+            weather.setSpeed(0.0);
+            weather.setPressure(0);
+            weather.setTempMax(0);
+            weather.setTempMin(0);
+        } finally {
+            return weather;
+        }
+    }
+
+    public Forecast getForecast(String country, String city) {
+        logger.info("Requesting weather forecast for {}/{}", country, city);
+        URI url = new UriTemplate(FORECAST_URL).expand(city, country, this.apiKey);
+        return invoke(url, Forecast.class);
+    }
+
+    private <T> T invoke(URI url, Class<T> responseType) {
+        RequestEntity<?> request = RequestEntity.get(url)
+                .accept(MediaType.APPLICATION_JSON).build();
+        ResponseEntity<T> exchange = this.restTemplate
+                .exchange(request, responseType);
+        return exchange.getBody();
+    }
 }

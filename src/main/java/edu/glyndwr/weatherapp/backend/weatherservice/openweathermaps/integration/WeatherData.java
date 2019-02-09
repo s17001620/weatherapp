@@ -23,6 +23,7 @@ import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.inte
 import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_VAR_END;
 import lombok.Setter;
 import lombok.Getter;
+import org.json.JSONObject;
 
 @Getter
 @Setter
@@ -33,16 +34,28 @@ public class WeatherData extends AbstractWeatherData implements Serializable {
     private float tempMax;
     private float pressure;
     private float humidity;
-    private float speed;
-    private int deg;
-    private float gust;
-    private int varBeg;
-    private int varEnd;
+    private Double speed;
+    private Double deg;
+    private Double gust;
+    private Integer varBeg;
+    private Integer varEnd;
+    private String mainWeather;
+    private String mainWeatherDescription;
 
     private Instant timestamp;
     private Integer weatherId;
     private String weatherIcon;
+    
+       	public WeatherData () {
+		super();
+	}
 
+    	public WeatherData (JSONObject json) {
+		super(json);
+	}
+
+    
+    
     @JsonProperty("timestamp")
     public Instant getTimestamp() {
         return this.timestamp;
@@ -62,20 +75,61 @@ public class WeatherData extends AbstractWeatherData implements Serializable {
         setHumidity(Float.parseFloat(main.get(JSON_HUMIDITY).toString()));
     }
 
+   
+    
     @JsonProperty("wind")
     public void setWind(Map<String, Object> wind) {
-        this.speed = (Float.parseFloat(wind.get(JSON_SPEED).toString()));
-        this.deg = (Integer.parseInt(wind.get(JSON_DEG).toString()));
-        this.gust = (Float.parseFloat(wind.get(JSON_GUST).toString()));
-        this.varBeg = (Integer.parseInt(wind.get(JSON_VAR_BEG).toString()));
-        this.varEnd = (Integer.parseInt(wind.get(JSON_VAR_END).toString()));
+
+        final Object windSpeedRaw = wind.get(JSON_SPEED);
+        final Object windDegRaw = wind.get(JSON_DEG);
+        final Object windGustRaw = wind.get(JSON_GUST);
+        final Object windVarBegRaw = wind.get(JSON_VAR_BEG);
+        final Object windVarEnd = wind.get(JSON_VAR_END);
+
+        if (null != windSpeedRaw) {
+            if(windSpeedRaw instanceof Double){
+            this.speed =  (Double) windSpeedRaw;
+            }
+        }else{
+               this.speed = 0.0;
+            }
+        if (null != windDegRaw) {
+            if (windDegRaw instanceof Double) {
+                this.deg = (Double) windDegRaw;
+            }
+        }else{
+                this.deg = 0.0;
+            }
+        if (null != windGustRaw) {
+            if (windGustRaw instanceof Double) {
+                this.gust = (Double) windGustRaw;
+            }
+        }else{
+                this.gust = 0.0;
+            }
+        if (null != windVarBegRaw) {
+            if (windVarBegRaw instanceof Integer) {
+                this.varBeg = (Integer) windVarBegRaw;
+            }
+        }else{
+                this.varBeg = 0;
+            }
+        if (null != windVarEnd) {
+            if (windVarEnd instanceof Integer) {
+                this.varEnd = (Integer) windVarBegRaw;
+            }
+        }else{
+                 this.varEnd = 0;
+            }
     }
 
     @JsonProperty("weather")
     public void setWeather(List<Map<String, Object>> weatherEntries) {
         Map<String, Object> weather = weatherEntries.get(0);
-        setWeatherId((Integer) weather.get("id"));
-        setWeatherIcon((String) weather.get("icon"));
+        setWeatherId((Integer) weather.get(Weather.JSON_VAR_MAIN_ID));
+        setWeatherIcon((String) weather.get(Weather.JSON_VAR_MAIN_ICON));
+        setMainWeather((String) weather.get(Weather.JSON_VAR_MAIN_WEATHER));
+        setMainWeatherDescription((String) weather.get(Weather.JSON_VAR_MAIN_WEATHER_DESCRIPTION));
     }
 
     public boolean hasTemp() {
@@ -99,7 +153,7 @@ public class WeatherData extends AbstractWeatherData implements Serializable {
     }
 
     public boolean hasSpeed() {
-        return !Float.isNaN(this.speed);
+        return !Double.isNaN(this.speed);
     }
 
     public boolean hasDeg() {
@@ -107,7 +161,7 @@ public class WeatherData extends AbstractWeatherData implements Serializable {
     }
 
     public boolean hasGust() {
-        return !Float.isNaN(this.gust);
+        return !Double.isNaN(this.gust);
     }
 
     public boolean hasVarBeg() {

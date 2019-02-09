@@ -4,6 +4,8 @@ import edu.glyndwr.weatherapp.frontend.controller.WeatherAppFrontendController;
 import edu.glyndwr.weatherapp.frontend.model.City;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,9 @@ public class CitySelectViewFactory {
 
     public GridPane buildWeatherUserControlls(WeatherAppFrontendController controller) {
         GridPane pane = new GridPane();
+        pane.setHgap(10); 
+        pane.setVgap(10);
+        pane.setPadding(new Insets(10, 10, 10, 10));
 
         controller.getCountryBox().getItems().addAll(controller.getWeatherAppFrontendConfiguration().getCountries().stream().sorted().collect(Collectors.toList()));
         controller.getCountryBox().setOnAction(event -> {
@@ -29,7 +34,7 @@ public class CitySelectViewFactory {
 
         controller.getCityBox().setOnAction(event -> {
             if (null != controller.getCityBox().getValue()) {
-                controller.loadWeather(controller.getCityBox().getValue());
+                Platform.runLater(() -> controller.loadWeather(controller.getCityBox().getValue()));
             }
         });
         pane.addRow(0, new Label("Country: "), controller.getCountryBox(), new Label("City: "), controller.getCityBox());

@@ -33,7 +33,7 @@ public class WeatherDataDisplayViewFactory {
 
         pane.setHgap(10);
         pane.setVgap(5);
-        SimpleDateFormat format = new SimpleDateFormat("EEEE, dd/MM/yyyy HH Z", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat(WeatherData.WEATHERDATA_DATE_FORMAT, Locale.ENGLISH);
         int row = 0;
         if (!isForecast) {
             pane.addRow(row++, new Label("Weather today:"));
@@ -42,18 +42,19 @@ public class WeatherDataDisplayViewFactory {
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         }
         if (null != weatherdata.getWeatherIcon()) {
-            ImageView weatherImage = new ImageView(new Image("http://openweathermap.org/img/w/" + weatherdata.getWeatherIcon() + ".png"));
+            ImageView weatherImage = new ImageView(new Image(WeatherData.WEATHERDATA_IMAGE_PATH + weatherdata.getWeatherIcon() + WeatherData.WEATHERDATA_IMAGE_FILETYPE));
             pane.addRow(row++, weatherImage, new Label(format.format(Date.from(weatherdata.getTimestamp()))), new Label(String.valueOf(weatherdata.getMainWeather())), new Label(String.valueOf(weatherdata.getMainWeatherDescription())));
         } else {
-            Label na = new Label("NOT AVAILABLE");
-            pane.addRow(row++, na, new Label("n/a"), new Label(String.valueOf(weatherdata.getMainWeather())), new Label(String.valueOf(weatherdata.getMainWeatherDescription())));
+            Label na = new Label(WeatherData.NOT_AVAILABLE);
+            pane.addRow(row++, na, new Label(WeatherData.NOT_AVAILABLE), new Label(String.valueOf(weatherdata.getMainWeather())), new Label(String.valueOf(weatherdata.getMainWeatherDescription())));
         }
-        pane.addRow(row++, new Label("Temperature: "), new Label(String.valueOf(weatherdata.getTemp())), new Label("Max Temperature: "), new Label(String.valueOf(weatherdata.getTempMax())), new Label("Min Temperature: "), new Label(String.valueOf(weatherdata.getTempMin())), new Label("Pressure: "), new Label(String.valueOf(weatherdata.getPressure())));
-        pane.addRow(row++, new Label("Humidity: "), new Label(String.valueOf(weatherdata.getHumidity())), new Label("Windspeed: "), new Label(String.valueOf(weatherdata.getSpeed())), new Label("Wind gust: "), new Label(String.valueOf(weatherdata.getGust())), new Label("Wind Direction: "), new Label(String.valueOf(weatherdata.getDeg())));
+        pane.addRow(row++, new Label("Temperature: "), new Label(String.format("%.2f",weatherdata.convertKelvinToCelsius(weatherdata.getTemp())) + " " + WeatherData.TEMPERATURE_CELSIUS_UNIT), new Label("Max Temperature: "), new Label(String.format("%.2f",weatherdata.convertKelvinToCelsius(weatherdata.getTempMax())) + " " + WeatherData.TEMPERATURE_CELSIUS_UNIT), new Label("Min Temperature: "), new Label(String.format("%.2f",weatherdata.convertKelvinToCelsius(weatherdata.getTempMin())) + " " + WeatherData.TEMPERATURE_CELSIUS_UNIT), new Label("Pressure: "), new Label(String.valueOf(weatherdata.getPressure()) + " " + WeatherData.PRESSURE_UNIT));
+        pane.addRow(row++, new Label("Humidity: "), new Label(String.valueOf(weatherdata.getHumidity())+ " " + WeatherData.HUMIDITY_UNIT), new Label("Windspeed: "), new Label(String.valueOf(weatherdata.getSpeed())+ " " + WeatherData.WINDSPEED_UNIT), new Label("Wind gust: "), new Label(String.valueOf(weatherdata.getGust())+ " " + WeatherData.WINDSPEED_UNIT), new Label("Wind Direction: "), new Label(String.valueOf(weatherdata.getDeg())));
         if (!isForecast) {
             pane.addRow(row++, new Label(""));
             pane.addRow(row++, new Label("Weather Forecast:"));
         }
+
         return pane;
     }
 

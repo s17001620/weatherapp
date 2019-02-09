@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.URI;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -45,17 +44,16 @@ public class OpenWeatherMapService {
         try {
             weather = invoke(url, WeatherToday.class);
         } catch (Exception e) {
-
             weather.setDeg(0.0);
             weather.setGust(0.0);
-            weather.setMainWeather("CITY NOT FOUND!");
-            weather.setMainWeatherDescription("CITY NOT FOUND!");
-            weather.setTemp(0);
-            weather.setHumidity(0);
+            weather.setMainWeather(WeatherToday.CITY_NOT_FOUND);
+            weather.setMainWeatherDescription(WeatherToday.CITY_NOT_FOUND);
+            weather.setTemp(0.0);
+            weather.setHumidity(0.0);
             weather.setSpeed(0.0);
-            weather.setPressure(0);
-            weather.setTempMax(0);
-            weather.setTempMin(0);
+            weather.setPressure(0.0);
+            weather.setTempMax(0.0);
+            weather.setTempMin(0.0);
         } finally {
             return weather;
         }

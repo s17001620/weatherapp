@@ -43,7 +43,7 @@ public class WeatherServiceFrontendUIFactory {
         pane.getChildren().addAll(citySelectViewFactory.buildWeatherUserControlls(controller), controller.getResultPane());
         
         root.setSpacing(5);
-        root.setMinWidth(818);
+        root.setMinWidth(830);
         root.setMinHeight(1000);
         final ScrollPane scroll = new ScrollPane();
         scroll.prefWidthProperty().bind(stage.widthProperty());

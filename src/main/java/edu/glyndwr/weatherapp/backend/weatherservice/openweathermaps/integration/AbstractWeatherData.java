@@ -10,7 +10,18 @@ import java.util.Calendar;
 import org.json.JSONObject;
 
 abstract public class AbstractWeatherData {
-
+        public static final String CITY_NOT_FOUND = "CITY NOT FOUND!";
+        public static final String NOT_AVAILABLE = "NOT AVAILABLE!";
+        public static final String WEATHERDATA_IMAGE_PATH = "http://openweathermap.org/img/w/";
+        public static final String WEATHERDATA_IMAGE_FILETYPE = ".png";
+        public static final String WEATHERDATA_DATE_FORMAT = "EEEE, dd/MM/yyyy HH Z";
+    
+        public static final String PRESSURE_UNIT="hpa";
+        public static final String HUMIDITY_UNIT="%";
+        public static final String WINDSPEED_UNIT="m/s";
+        public static final String TEMPERATURE_KELVIN_UNIT= "°k";
+        public static final String TEMPERATURE_CELSIUS_UNIT= "°C";
+        
         protected static final String JSON_DATE_TIME = "dt";
         protected static final String JSON_WEATHER   = "weather";
 	protected static final String JSON_MAIN      = "main";

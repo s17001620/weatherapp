@@ -6,10 +6,8 @@ import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration
 import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.WeatherData;
 import edu.glyndwr.weatherapp.frontend.controller.WeatherAppFrontendController;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Scene;

@@ -12,7 +12,12 @@
     <artifactId>weatherapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>weatherapp</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Task 4: Weather forecast app 
+        The program for task 4 will read a list of city names from a text
+        file, filter by country and allow the user to select a particular
+        location. Once the location has been selected, a weather
+        forecast will be retrieved via an online API and displayed to the
+        user.</description>
 
     <properties>
         <java.version>11</java.version>

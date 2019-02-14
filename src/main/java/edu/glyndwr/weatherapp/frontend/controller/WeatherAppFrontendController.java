@@ -1,7 +1,7 @@
 package edu.glyndwr.weatherapp.frontend.controller;
 
 import edu.glyndwr.weatherapp.backend.weatherservice.intregration.controller.WeatherServiceController;
-import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.WeatherData;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.WeatherData;
 import edu.glyndwr.weatherapp.frontend.configuration.WeatherAppFrontendConfiguration;
 import edu.glyndwr.weatherapp.frontend.factories.WeatherServiceFrontendUIFactory;
 import edu.glyndwr.weatherapp.frontend.model.City;

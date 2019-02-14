@@ -1,4 +1,4 @@
-package edu.glyndwr.weatherapp.backend.weatherservice.integration.model;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations;
 
 /**
  *

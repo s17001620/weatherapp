@@ -6,7 +6,7 @@ package edu.glyndwr.weatherapp.backend.weatherservice.integration.model.supercla
  *
  * @author Alexander Bruckbauer s17001620
  */
-import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.WeatherData;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.WeatherData;
 import java.util.Calendar;
 import org.json.JSONObject;
 

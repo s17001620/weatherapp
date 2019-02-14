@@ -1,6 +1,6 @@
 
 
-package edu.glyndwr.weatherapp.backend.weatherservice.integration.model;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;

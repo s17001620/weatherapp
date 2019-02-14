@@ -1,7 +1,7 @@
 package edu.glyndwr.weatherapp.backend.weatherservice.integration.controller;
 
 import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.Forecast;
-import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.OpenWeatherMapService;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.service.OpenWeatherMapService;
 import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.WeatherToday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

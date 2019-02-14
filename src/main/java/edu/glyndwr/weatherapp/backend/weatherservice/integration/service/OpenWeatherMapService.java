@@ -1,6 +1,8 @@
-package edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.service;
 
 import edu.glyndwr.weatherapp.backend.weatherservice.integration.configuration.WeatherAppApiConfiguration;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.Forecast;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.WeatherToday;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.URI;

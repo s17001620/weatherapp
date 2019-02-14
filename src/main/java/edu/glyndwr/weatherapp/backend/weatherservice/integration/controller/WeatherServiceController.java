@@ -1,4 +1,4 @@
-package edu.glyndwr.weatherapp.backend.weatherservice.intregration.controller;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.controller;
 
 import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.Forecast;
 import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.implementations.OpenWeatherMapService;

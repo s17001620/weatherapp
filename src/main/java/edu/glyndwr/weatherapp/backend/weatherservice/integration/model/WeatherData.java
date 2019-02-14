@@ -1,9 +1,10 @@
-package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.model;
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.superclasses.AbstractWeatherData;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
@@ -11,16 +12,6 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Main.JSON_HUMIDITY;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Main.JSON_PRESSURE;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Main.JSON_TEMP;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Main.JSON_TEMP_MAX;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Main.JSON_TEMP_MIN;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_DEG;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_GUST;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_SPEED;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_VAR_BEG;
-import static edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.AbstractWeatherData.Wind.JSON_VAR_END;
 import lombok.Setter;
 import lombok.Getter;
 import org.json.JSONObject;
@@ -66,21 +57,21 @@ public class WeatherData extends AbstractWeatherData implements Serializable {
 
     @JsonProperty("main")
     public void setMain(Map<String, Object> main) {
-        setTemp(parseNumericValueAsDouble(main.get(JSON_TEMP)));
-        setTempMin(parseNumericValueAsDouble(main.get(JSON_TEMP_MIN)));
-        setTempMax(parseNumericValueAsDouble(main.get(JSON_TEMP_MAX)));
-        setPressure(parseNumericValueAsDouble(main.get(JSON_PRESSURE)));
-        setHumidity(parseNumericValueAsDouble(main.get(JSON_HUMIDITY)));
+        setTemp(parseNumericValueAsDouble(main.get(AbstractWeatherData.Main.JSON_TEMP)));
+        setTempMin(parseNumericValueAsDouble(main.get(AbstractWeatherData.Main.JSON_TEMP_MIN)));
+        setTempMax(parseNumericValueAsDouble(main.get(AbstractWeatherData.Main.JSON_TEMP_MAX)));
+        setPressure(parseNumericValueAsDouble(main.get(AbstractWeatherData.Main.JSON_PRESSURE)));
+        setHumidity(parseNumericValueAsDouble(main.get(AbstractWeatherData.Main.JSON_HUMIDITY)));
     }
 
     @JsonProperty("wind")
     public void setWind(Map<String, Object> wind) {
 
-        final Object windSpeedRaw = wind.get(JSON_SPEED);
-        final Object windDegRaw = wind.get(JSON_DEG);
-        final Object windGustRaw = wind.get(JSON_GUST);
-        final Object windVarBegRaw = wind.get(JSON_VAR_BEG);
-        final Object windVarEnd = wind.get(JSON_VAR_END);
+        final Object windSpeedRaw = wind.get(AbstractWeatherData.Wind.JSON_SPEED);
+        final Object windDegRaw = wind.get(AbstractWeatherData.Wind.JSON_DEG);
+        final Object windGustRaw = wind.get(AbstractWeatherData.Wind.JSON_GUST);
+        final Object windVarBegRaw = wind.get(AbstractWeatherData.Wind.JSON_VAR_BEG);
+        final Object windVarEnd = wind.get(AbstractWeatherData.Wind.JSON_VAR_END);
 
         this.speed = parseNumericValueAsDouble(windSpeedRaw);
         this.deg = parseNumericValueAsDouble(windDegRaw);

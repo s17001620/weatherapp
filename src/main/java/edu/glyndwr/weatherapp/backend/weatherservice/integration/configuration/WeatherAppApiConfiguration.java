@@ -1,6 +1,6 @@
 
 
-package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.configuration;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.configuration;
 
 /**
  *

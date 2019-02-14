@@ -1,11 +1,12 @@
 
 
-package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.model.superclasses;
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.WeatherData;
 import java.util.Calendar;
 import org.json.JSONObject;
 
@@ -28,11 +29,11 @@ abstract public class AbstractWeatherData {
 	protected static final String JSON_WIND      = "wind";
 
 	static abstract public class Main {
-		protected static final String JSON_TEMP     = "temp";
-		protected static final String JSON_TEMP_MIN = "temp_min";
-		protected static final String JSON_TEMP_MAX = "temp_max";
-		protected static final String JSON_HUMIDITY = "humidity";
-		protected static final String JSON_PRESSURE = "pressure";
+		public static final String JSON_TEMP     = "temp";
+		public static final String JSON_TEMP_MIN = "temp_min";
+		public static final String JSON_TEMP_MAX = "temp_max";
+		public static final String JSON_HUMIDITY = "humidity";
+		public static final String JSON_PRESSURE = "pressure";
 
 		abstract public float getTemp ();
 		abstract public float getTempMin ();
@@ -42,11 +43,11 @@ abstract public class AbstractWeatherData {
 	}
 
 	static abstract public class Wind {
-		protected static final String JSON_SPEED   = "speed";
-		protected static final String JSON_DEG     = "deg";
-		protected static final String JSON_GUST    = "gust";
-		protected static final String JSON_VAR_BEG = "var_beg";
-		protected static final String JSON_VAR_END = "var_end";
+		public static final String JSON_SPEED   = "speed";
+		public static final String JSON_DEG     = "deg";
+		public static final String JSON_GUST    = "gust";
+		public static final String JSON_VAR_BEG = "var_beg";
+		public static final String JSON_VAR_END = "var_end";
 
 		abstract public float getSpeed ();
 		abstract public int getDeg ();
@@ -56,10 +57,10 @@ abstract public class AbstractWeatherData {
 	}
         
         static abstract public class Weather {
-            protected static final String JSON_VAR_MAIN_ID = "id";
-            protected static final String JSON_VAR_MAIN_ICON = "icon";
-            protected static final String JSON_VAR_MAIN_WEATHER = "main";
-            protected static final String JSON_VAR_MAIN_WEATHER_DESCRIPTION = "description";
+            public static final String JSON_VAR_MAIN_ID = "id";
+            public static final String JSON_VAR_MAIN_ICON = "icon";
+            public static final String JSON_VAR_MAIN_WEATHER = "main";
+            public static final String JSON_VAR_MAIN_WEATHER_DESCRIPTION = "description";
             
             abstract public float getMainWeather ();
             abstract public float getDescription ();

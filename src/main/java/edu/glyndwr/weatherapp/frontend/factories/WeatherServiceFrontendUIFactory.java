@@ -2,8 +2,8 @@
 
 package edu.glyndwr.weatherapp.frontend.factories;
 
-import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.Forecast;
-import edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration.WeatherData;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.Forecast;
+import edu.glyndwr.weatherapp.backend.weatherservice.integration.model.WeatherData;
 import edu.glyndwr.weatherapp.frontend.controller.WeatherAppFrontendController;
 import java.text.SimpleDateFormat;
 import java.util.Date;

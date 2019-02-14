@@ -1,6 +1,6 @@
 
 
-package edu.glyndwr.weatherapp.backend.weatherservice.openweathermaps.integration;
+package edu.glyndwr.weatherapp.backend.weatherservice.integration.model;
 
 import lombok.Getter;
 import lombok.Setter;
